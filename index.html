@@ -10,7 +10,9 @@
 </head>
 <body>
     <div class="container">
+    <div class="weather-app-wrapper">
     <div class="weather-app">
+        <div class="overview">
     <h1>
         New York
     </h1>
@@ -22,10 +24,17 @@
             Clear
         </li>
     </ul>
+</div>
         <div class="row">
-            <div class="col-md-6">
-                <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="partly cloudy" />
-                12°C/ °F
+            <div class="col-6">
+                <div class="clearfix weather-temperature">
+                <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" 
+                alt="partly cloudy" 
+                class="float-left"/>
+                <div class="float-left">
+                <strong>12</strong><span class="units">°C | <a href="3">°F</a></span>
+            </div>
+        </div>
             </div>
             <div class="col-md-6">
                 <ul>
@@ -41,10 +50,11 @@
                 </ul>
             </div>
         </div>
+        </div>
         <small>
             <a href"https://github.com/JessieVaught/vanilla-weather-app" target="_blank">Open-Source code</a> by Jessie Vaught
         </small>
-    </div>
+        </div>
     </div>
     <script src="src/index.js"></script>
 </body>
