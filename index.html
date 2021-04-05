@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla Weather App</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="src/style.css">
 </head>
@@ -13,14 +14,14 @@
     <div class="weather-app-wrapper">
     <div class="weather-app">
         <div class="overview">
-    <h1>
-        New York
+    <h1 id="city">
+        Paris
     </h1>
     <ul>
-        <li>
+        <li id="date">
             Friday 05:00
         </li>
-        <li>
+        <li id="description">
             Clear
         </li>
     </ul>
@@ -32,20 +33,17 @@
                 alt="partly cloudy" 
                 class="float-left"/>
                 <div class="float-left">
-                <strong>12</strong><span class="units">°C | <a href="3">°F</a></span>
+                <strong id="temperature">12</strong><span class="units">°C | <a href="3">°F</a></span>
             </div>
         </div>
             </div>
             <div class="col-md-6">
                 <ul>
                     <li>
-                        Precipitation: 0%
+                        Humidity: <span id="humidity"></span>%
                     </li>
                     <li>
-                        Humidity: 11%
-                    </li>
-                    <li>
-                        Wind: 2 km/h
+                        Wind: <span id="wind"></span> km/h
                     </li>
                 </ul>
             </div>
