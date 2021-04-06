@@ -41,12 +41,21 @@ function displayTemperature(response) {
 }
 
 
-
+function search(city) {
 let apiKey='0ae703064e17d8cb6a410a5138e15a28';
 let unit='Metric';
-let city='Salt Lake City'
 let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
 
-console.log(apiUrl)
-
 axios.get(apiUrl).then(displayTemperature);
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement=document.querySelector("#city-input");
+    search(cityInputElement.value)
+}
+
+search("New York");
+
+let form=document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit)
