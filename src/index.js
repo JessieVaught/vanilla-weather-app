@@ -37,6 +37,11 @@ function displayTemperature(response) {
     iconElement.setAttribute("alt", response.data.weather[0].description)
 }
 
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement=document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
 
 function search(city) {
 let apiKey='0ae703064e17d8cb6a410a5138e15a28';
@@ -46,24 +51,11 @@ let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${ap
 axios.get(apiUrl).then(displayTemperature);
 }
 
-function handleSubmit(event) {
-    event.preventDefault();
-    let cityInputElement=document.querySelector("#city-input");
-    search(cityInputElement.value);
-}
-
-let celsiusTemperature= null;
-
-
-let form=document.querySelector("#search-form");
-form.addEventListener("submit", handleSubmit)
-
 function showFarenheitTemperature(event) {
     event.preventDefault();
     let temperatureElement=document.querySelector("#temperature");
     let farenheitTemperature=((celsiusTemperature * 9) / 5 + 32);
     temperatureElement.innerHTML=Math.round(farenheitTemperature);
-
     celsiusLink.classList.remove("active");
     farenheitLink.classList.add("active")
 }
@@ -72,10 +64,16 @@ function showCelsiusTemperature(event) {
     event.preventDefault();
     temperatureElement=document.querySelector("#temperature");
     temperatureElement.innerHTML=Math.round(celsiusTemperature);
-
     celsiusLink.classList.add("active");
     farenheitLink.classList.remove("active")
 }
+
+
+
+let celsiusTemperature= null;
+
+let form=document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit)
 
 let farenheitLink=document.querySelector("#farenheit-link");
 farenheitLink.addEventListener("click", showFarenheitTemperature)
@@ -84,4 +82,4 @@ let celsiusLink=document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemperature)
 
 
-search("New York");
+search("Paris");
