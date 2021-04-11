@@ -15,7 +15,8 @@ function formatDate(timestamp){
 
 function getForecast(coordinates) {
     let apiKey='0ae703064e17d8cb6a410a5138e15a28';
-    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`
+    let unit='imperial'
+    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
     console.log(apiUrl);
 
     axios.get(apiUrl).then(displayForecast);
@@ -38,7 +39,7 @@ function displayTemperature(response) {
     cityElement.innerHTML = response.data.name;
     descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = response.data.main.humidity;    
-    windElement.innerHTML = response.data.wind.speed;    
+    windElement.innerHTML = Math.round(response.data.wind.speed);    
     dateElement.innerHTML=formatDate(response.data.dt*1000);    
     iconElement.setAttribute("src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
@@ -56,28 +57,12 @@ function handleSubmit(event) {
 
 function search(city) {
 let apiKey='0ae703064e17d8cb6a410a5138e15a28';
-let unit='Metric';
+let unit='imperial';
 let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
 
 axios.get(apiUrl).then(displayTemperature);
 }
 
-function showFarenheitTemperature(event) {
-    event.preventDefault();
-    let temperatureElement=document.querySelector("#temperature");
-    let farenheitTemperature=((celsiusTemperature * 9) / 5 + 32);
-    temperatureElement.innerHTML=Math.round(farenheitTemperature);
-    celsiusLink.classList.remove("active");
-    farenheitLink.classList.add("active")
-}
-
-function showCelsiusTemperature(event) {
-    event.preventDefault();
-    temperatureElement=document.querySelector("#temperature");
-    temperatureElement.innerHTML=Math.round(celsiusTemperature);
-    celsiusLink.classList.add("active");
-    farenheitLink.classList.remove("active")
-}
 
 function formatDay(timestamp){
 
@@ -118,12 +103,5 @@ let celsiusTemperature= null;
 let form=document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit)
 
-let farenheitLink=document.querySelector("#farenheit-link");
-farenheitLink.addEventListener("click", showFarenheitTemperature)
-
-let celsiusLink=document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", showCelsiusTemperature)
-
 
 search("Paris");
-/* displayForecast(); */

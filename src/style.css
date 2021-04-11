@@ -89,3 +89,7 @@ li {
 .weather-forecast-temperature-min{
     opacity: 0.5;
 }
+
+.wind-unit {
+    text-transform: lowercase;
+}
